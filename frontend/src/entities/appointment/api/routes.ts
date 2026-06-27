@@ -1,0 +1,15 @@
+export const APPOINTMENT_ROUTES = {
+  list: '/appointments/',
+  detail: (id: number) => `/appointments/${id}/`,
+  cancel: (id: number) => `/appointments/${id}/cancel/`,
+  reschedule: (id: number) => `/appointments/${id}/reschedule/`,
+  markNoShow: (id: number) => `/appointments/${id}/mark-no-show/`,
+  calendarDay: '/calendar/day/',
+  calendarWeek: '/calendar/week/',
+  availableSlots: '/available-slots/',
+  publicAvailableSlots: '/public/available-slots/',
+  scheduleRules: '/schedule-rules/',
+  scheduleRule: (id: number) => `/schedule-rules/${id}/`,
+  timeOffBlocks: '/time-off-blocks/',
+  timeOffBlock: (id: number) => `/time-off-blocks/${id}/`,
+} as const
