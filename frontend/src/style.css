@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f4f7f8;
+  --bg-accent: #e9f0f2;
+  --surface: #ffffff;
+  --text: #1a2b2e;
+  --muted: #60757b;
+  --primary: #2a8f87;
+  --primary-soft: #d7efec;
+  --danger: #c03d4f;
+  --warning: #b67a1a;
+  --ring: rgba(42, 143, 135, 0.35);
+  --shadow: 0 10px 28px rgba(22, 40, 44, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 10%, #f8fcfd 0, #f8fcfd 18%, transparent 45%),
+    radial-gradient(circle at 88% 18%, #eef7f8 0, #eef7f8 14%, transparent 40%),
+    linear-gradient(180deg, var(--bg) 0%, #eef4f5 100%);
+  color: var(--text);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+.card {
+  @apply rounded-2xl bg-white p-4 md:p-5;
+  box-shadow: var(--shadow);
+}
+
+.input {
+  @apply w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition;
+}
+
+.input:hover {
+  border-color: #cbd5e1;
+}
+
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.4rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #64748b 50%),
+    linear-gradient(135deg, #64748b 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+select.input:hover {
+  background-color: #f8fafc;
+}
+
+select.input:focus {
+  background-color: #fff;
+}
+
+select.input option {
+  background-color: #fff;
+  color: #0f172a;
+}
+
+select.input option:checked {
+  color: #134e4a;
+  background-color: #d7efec;
+}
+
+select.input option:disabled {
+  color: #94a3b8;
+}
+
+.btn,
+.btn-primary,
+.btn-muted,
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transform: translateY(0);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    filter 0.2s ease;
+}
+
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(120deg, #2a8f87, #3ba79f);
+}
+
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.btn-muted {
+  border: 1px solid rgb(226 232 240);
+  background: #fff;
+  color: rgb(51 65 85);
+}
+
+.btn-muted:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.btn-danger {
+  color: #fff;
+  background: linear-gradient(120deg, #c03d4f, #d65465);
+}
+
+.btn-danger:hover:not(:disabled) {
+  filter: brightness(1.03);
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-muted:hover:not(:disabled),
+.btn-danger:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+}
+
+.btn-primary:active:not(:disabled),
+.btn-muted:active:not(:disabled),
+.btn-danger:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
+}
+
+.btn-primary:disabled,
+.btn-muted:disabled,
+.btn-danger:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-muted:focus-visible,
+.btn-danger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.nav-link {
+  @apply block rounded-xl text-sm text-slate-600;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-link:hover {
+  background: #eef4f7;
+  color: var(--primary);
+  transform: translateX(2px);
+}
+
+.nav-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.text-link {
+  color: var(--primary);
+  font-weight: 600;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.text-link:hover {
+  color: #1f756f;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.text-link:focus-visible {
+  outline: none;
+  border-radius: 0.375rem;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 0.2s ease;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@media (max-width: 768px) {
+  .card {
+    @apply rounded-xl;
+  }
+}
