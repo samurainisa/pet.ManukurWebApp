@@ -1,0 +1,52 @@
+﻿services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: manikur_db
+      POSTGRES_USER: manikur_user
+      POSTGRES_PASSWORD: manikur_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    working_dir: /app
+    command: >
+      sh -c "until python manage.py migrate; do echo 'Ожидание БД...'; sleep 2; done;
+      python manage.py create_master_demo;
+      python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - ./backend/.env.example
+    environment:
+      POSTGRES_DB: manikur_db
+      POSTGRES_USER: manikur_user
+      POSTGRES_PASSWORD: manikur_password
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    working_dir: /app
+    command: npm run dev -- --host 0.0.0.0 --port 5173
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000/api/v1
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  pg_data:
