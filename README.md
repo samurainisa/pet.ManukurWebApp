@@ -1,4 +1,4 @@
-﻿# ManikurWebApp
+﻿# ManikurWebApp (freelance project)
 
 Простой рабочий MVP для автоматизации маникюрного сервиса.
 
