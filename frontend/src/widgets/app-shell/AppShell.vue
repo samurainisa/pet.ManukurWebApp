@@ -3,7 +3,6 @@
     <aside class="hidden w-72 shrink-0 border-r border-slate-200 bg-white lg:flex lg:flex-col">
       <div class="px-6 py-6">
         <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Nail Office</p>
-        <h1 class="mt-2 text-xl font-bold text-slate-800">ManikurWebApp</h1>
       </div>
 
       <nav class="flex-1 space-y-1 px-3">

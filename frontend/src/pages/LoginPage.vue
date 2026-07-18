@@ -28,22 +28,11 @@
           {{ loading ? 'Выполняю вход...' : 'Войти' }}
         </button>
       </form>
-
-      <div class="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-600">
-        <p class="font-semibold text-slate-700">Демо-данные мастера</p>
-        <p class="mt-1">Логин: <code>master</code></p>
-        <p>Пароль: <code>master12345</code></p>
-      </div>
-
       <p class="mt-4 text-xs text-slate-500">
         Нет аккаунта?
         <RouterLink class="text-link" to="/register">Зарегистрироваться</RouterLink>
       </p>
 
-      <p class="mt-2 text-xs text-slate-400">
-        Публичная запись клиентов:
-        <RouterLink class="text-link" to="/book">/book</RouterLink>
-      </p>
     </div>
   </div>
 </template>

@@ -1,7 +1,6 @@
 from datetime import timedelta
 
-from django.db.models import Count, Sum
-from django.db.models.functions import TruncDate
+from django.db.models import Count, F, Sum
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from rest_framework import permissions
@@ -114,7 +113,7 @@ class AnalyticsRevenueView(AnalyticsBaseView):
                 appointment__appointment_date__range=[date_from, date_to],
                 payment_status__in=[Payment.PaymentStatus.PAID, Payment.PaymentStatus.PARTIAL],
             )
-            .annotate(day=TruncDate('appointment__appointment_date'))
+            .annotate(day=F('appointment__appointment_date'))
             .values('day')
             .annotate(total=Sum('amount'))
             .order_by('day')
