@@ -1,10 +1,50 @@
 ﻿# ManikurWebApp (freelance project)
 
-Простой рабочий MVP для автоматизации маникюрного сервиса.
+Рабочий MVP для автоматизации маникюрного мастера: клиенты, услуги, расписание, визиты, оплаты и аналитика в одном кабинете.
 
 Стек:
-- Backend: Django + DRF + PostgreSQL
+- Backend: Django + DRF (Token auth), PostgreSQL или SQLite для dev
 - Frontend: Vue 3 + TypeScript + Tailwind CSS + Vite
+
+## Интерфейс
+
+Кабинет мастера собран вокруг бокового меню: **Дашборд, Клиенты, Услуги, Расписание, Аналитика, График**.
+
+### Вход
+
+Отдельная страница входа для мастера. Логин и пароль, ссылка на регистрацию.
+
+![Вход](frontend/screens/login.png)
+
+### Дашборд
+
+Сводка на сегодня: записи за день и за период, отмены, неявки. Быстрые действия (новая запись, новый клиент, новая услуга), список сегодняшних и ближайших визитов со статусами.
+
+![Дашборд](frontend/screens/main-page.png)
+
+### Услуги
+
+Справочник услуг с длительностью, ценой и статусом. Справа форма создания, у каждой карточки — редактирование и удаление.
+
+![Услуги](frontend/screens/услуги.png)
+
+### Карта клиента
+
+История визитов и оплат по конкретному клиенту: заметки, общая сумма оплат, таблица визитов со статусом и оплатой.
+
+![Карта клиента](frontend/screens/история_клиента.png)
+
+### Аналитика
+
+Период с фильтром по датам. Визиты, отмены, неявки, выручка, топ услуг по записям и выручка по дням в виде столбиков.
+
+![Аналитика](frontend/screens/дешборд.png)
+
+### График работы
+
+Базовый график по дням недели (рабочий день, время начала и конца) и разовые блокировки времени с причиной.
+
+![График работы](frontend/screens/график.png)
 
 ## Что реализовано
 
@@ -42,15 +82,18 @@
   - `/book`
   - `/book/success`
 - Приватные страницы мастера:
-  - `/login`
+  - `/login`, `/register`
   - `/dashboard`
-  - `/clients`
-  - `/clients/:id`
+  - `/clients`, `/clients/:id`
   - `/services`
   - `/schedule`
   - `/appointments/:id`
   - `/analytics`
   - `/settings/schedule`
+- Кабинет клиента (роль `client`):
+  - `/client/book`
+  - `/client/appointments`
+  - `/client/notifications`
 - В формах и списках:
   - loading states
   - error states
@@ -63,7 +106,7 @@
 ```text
 backend/
   config/         # settings, urls, api router
-  users/          # auth API
+  users/          # auth API, роли мастер/клиент
   clients/        # клиентская база
   services/       # справочник услуг
   scheduling/     # график, блокировки, записи, публичные слоты
@@ -73,11 +116,11 @@ backend/
   core/           # интеграционные тесты MVP
 
 frontend/
-  src/api         # typed API client + entity API
-  src/types       # DTO типы
-  src/router      # маршруты и auth guard
-  src/components  # shell и UI блоки
+  src/app         # роутер, провайдеры, App.vue
+  src/entities    # сущности (client, service, appointment, ...) с api и store
   src/pages       # страницы мастера и публичной записи
+  src/widgets     # app-shell (боковое меню + шапка)
+  src/shared      # ui-компоненты, http-клиент, утилиты, типы
   src/test        # frontend test setup
 ```
 
@@ -116,6 +159,17 @@ npm run dev
 ```
 
 Frontend по умолчанию: `http://localhost:5173`
+
+### 3. Демо-данные (опционально)
+
+Заполнить базу клиентами, записями, визитами и оплатами за месяц:
+
+```bash
+cd backend
+python manage.py generate_demo_month_data --month 2026-07 --clients 40 --appointments 95
+```
+
+Параметры: `--month YYYY-MM`, `--clients`, `--appointments`, `--seed`.
 
 ## Docker (опционально)
 
@@ -215,7 +269,6 @@ Smoke/component tests:
 - без SMS
 - без email-уведомлений
 - без онлайн-оплаты
-- без client auth/личного кабинета
 - без WebSocket/realtime
 - без мульти-мастера и мультифилиальности
 
